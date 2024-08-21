@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background-color: whitesmoke;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card-paragraph {
+  font-size: 14px;
+}
+
+.backside {
+  background-color: rgb(241, 13, 13);
+  color: white;
+  text-shadow: 1px 1px 1px black;
+  letter-spacing: 1.3px;
+}
