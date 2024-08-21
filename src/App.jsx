@@ -1,6 +1,41 @@
 import './App.css';
 import { useState } from 'react';
 
+const questions = [
+  {
+    id: 1,
+    question: 'What language is React based on?"',
+    answer: 'JavaScript',
+  },
+  {
+    id: 2,
+    question: 'What are the building blocks of React apps?',
+    answer: 'Components',
+  },
+  {
+    id: 3,
+    question:
+      "What's the name of the syntax we use to describe an UI in React?",
+    answer: 'JSX',
+  },
+  {
+    id: 4,
+    question: 'How to pass data from parent to child component?',
+    answer: 'Props',
+  },
+  {
+    id: 5,
+    question: 'How to give components memory?',
+    answer: 'useState hook',
+  },
+  {
+    id: 6,
+    question:
+      'What do we call an input element that is completely synchronised with state',
+    answer: 'Controlled element',
+  },
+];
+
 function App() {
   const [reversed, setReversed] = useState(false);
 
@@ -9,32 +44,29 @@ function App() {
   };
   return (
     <div className="main-container">
-      <FlashCard text="What language is React based on?" />
-      <FlashCard text="What are the building blocks of React apps?" />
-      <FlashCard text="What's the name of the syntax we use to describe an UI in React?" />
-      <FlashCard text="How to pass data from parent to child component?" />
-      <FlashCard text="How to give components memory?" />
-      <FlashCard
-        text="What do we call an input element that is completely synchronised with
-          state?"
-      />
+      <FlashCards />
     </div>
   );
 }
 
-function FlashCard({ text }) {
-  const [reversed, setReversed] = useState(false);
-
-  const handleClick = () => {
-    setReversed(!reversed);
-  };
+function FlashCards() {
+  const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <div
-      className={`card ${reversed ? 'backside' : ''}`}
-      onClick={handleClick}>
-      <p className="card-paragraph">{text}</p>
-    </div>
+    <ul
+      style={{ listStyle: 'none' }}
+      className="cards-container">
+      {questions.map((question) => (
+        <li
+          onClick={() => setSelectedId(question.id)}
+          key={question.id}
+          className={`card ${selectedId === question.id ? 'backside' : ''}`}>
+          <p>
+            {question.id === selectedId ? question.answer : question.question}
+          </p>
+        </li>
+      ))}
+    </ul>
   );
 }
 
