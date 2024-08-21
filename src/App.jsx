@@ -53,7 +53,13 @@ function FlashCards() {
       className="cards-container">
       {questions.map((question) => (
         <li
-          onClick={() => setSelectedId(question.id)}
+          onClick={() => {
+            if (selectedId !== question.id) {
+              setSelectedId(question.id);
+            } else {
+              setSelectedId(null);
+            }
+          }}
           key={question.id}
           className={`card ${selectedId === question.id ? 'backside' : ''}`}>
           <p>
