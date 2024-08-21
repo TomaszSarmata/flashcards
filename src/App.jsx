@@ -37,11 +37,6 @@ const questions = [
 ];
 
 function App() {
-  const [reversed, setReversed] = useState(false);
-
-  const handleClick = () => {
-    setReversed(!reversed);
-  };
   return (
     <div className="main-container">
       <FlashCards />
