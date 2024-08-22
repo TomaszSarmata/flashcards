@@ -76,7 +76,7 @@ function FlashCards() {
 
 function DateCounter() {
   const [step, setStep] = useState(0);
-  const [numOfDays, setNumOfDays] = useState('');
+  const [numOfDays, setNumOfDays] = useState(0);
   const date = new Date();
   date.setDate(date.getDate() + Number(numOfDays));
 
@@ -98,7 +98,7 @@ function DateCounter() {
   };
 
   const handleReset = () => {
-    setNumOfDays('');
+    setNumOfDays(0);
     setStep(0);
   };
 
@@ -147,7 +147,9 @@ function DateCounter() {
             : `${numOfDays} days from today is ${formattedDate}`}
         </p>
       </div>
-      <button onClick={handleReset}>Reset</button>
+      {numOfDays !== 0 || step !== 0 ? (
+        <button onClick={handleReset}>Reset</button>
+      ) : null}
     </div>
   );
 }
