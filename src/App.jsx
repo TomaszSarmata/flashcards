@@ -48,26 +48,69 @@ function FlashCards() {
   const [selectedId, setSelectedId] = useState(null);
 
   return (
-    <ul
-      style={{ listStyle: 'none' }}
-      className="cards-container">
-      {questions.map((question) => (
-        <li
-          onClick={() => {
-            if (selectedId !== question.id) {
-              setSelectedId(question.id);
-            } else {
-              setSelectedId(null);
-            }
-          }}
-          key={question.id}
-          className={`card ${selectedId === question.id ? 'backside' : ''}`}>
-          <p>
-            {question.id === selectedId ? question.answer : question.question}
-          </p>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul
+        style={{ listStyle: 'none' }}
+        className="cards-container">
+        {questions.map((question) => (
+          <li
+            onClick={() => {
+              if (selectedId !== question.id) {
+                setSelectedId(question.id);
+              } else {
+                setSelectedId(null);
+              }
+            }}
+            key={question.id}
+            className={`card ${selectedId === question.id ? 'backside' : ''}`}>
+            <p>
+              {question.id === selectedId ? question.answer : question.question}
+            </p>
+          </li>
+        ))}
+      </ul>
+      <DateCounter />
+    </>
+  );
+}
+
+function DateCounter() {
+  const [output, setOutput] = useState(0);
+  return (
+    <div className="counter-container">
+      <div className="slider-container">
+        <span className="step">Step 1</span>
+
+        <p>
+          Increase the step using slider (it will multiply the
+          increment/decrement of days)
+        </p>
+        <input
+          onChange={(e) => setOutput(e.target.value)}
+          type="range"
+          min="0"
+          max="10"
+        />
+        <span className="range-output">
+          Days: <output>{output}</output>
+        </span>
+      </div>
+
+      <div className="buttons-container">
+        <span className="step">Step 2</span>
+        <p>
+          Now increase the number of days using buttons or by typing in the
+          number directly
+        </p>
+        <button>-</button>
+        <input type="text" />
+        <button>+</button>
+      </div>
+      <div className="final-text-container">
+        <span className="step">Step 3 - Results Below</span>
+        <p>Final text here</p>
+      </div>
+    </div>
   );
 }
 
