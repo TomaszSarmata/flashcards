@@ -94,11 +94,7 @@ function DateCounter() {
 
   const handleIncrease = () => {
     if (step === 0) setNumOfDays((curr) => +curr + 1);
-    else setNumOfDays((curr) => curr + Number(step));
-  };
-
-  const handleUserInput = (e) => {
-    setNumOfDays(e.target.vlaue);
+    else setNumOfDays((curr) => +curr + Number(step));
   };
 
   const handleReset = () => {
