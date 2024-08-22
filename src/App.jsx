@@ -77,6 +77,15 @@ function FlashCards() {
 function DateCounter() {
   const [step, setStep] = useState(0);
   const [numOfDays, setNumOfDays] = useState('');
+  const date = new Date();
+  date.setDate(date.getDate() + Number(numOfDays));
+
+  const formattedDate = date.toLocaleDateString('en-GB', {
+    weekday: 'long',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
 
   const handleDecrease = () => {
     if (step === 0) setNumOfDays((curr) => curr - 1);
@@ -128,13 +137,19 @@ function DateCounter() {
         <input
           type="text"
           value={numOfDays}
-          onChange={(e) => setNumOfDays(+e.target.value)}
+          onChange={(e) => {
+            if (!isNaN(e.target.value)) setNumOfDays(+e.target.value);
+          }}
         />
         <button onClick={handleIncrease}>+</button>
       </div>
       <div className="final-text-container">
         <span className="step">Step 3 - Results Below</span>
-        <p>Final text here</p>
+        <p>
+          {!numOfDays
+            ? `Today is ${formattedDate}`
+            : `${numOfDays} days from today is ${formattedDate}`}
+        </p>
       </div>
       <button onClick={handleReset}>Reset</button>
     </div>
