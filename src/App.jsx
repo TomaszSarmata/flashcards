@@ -75,7 +75,28 @@ function FlashCards() {
 }
 
 function DateCounter() {
-  const [output, setOutput] = useState(0);
+  const [step, setStep] = useState(0);
+  const [numOfDays, setNumOfDays] = useState('');
+
+  const handleDecrease = () => {
+    if (step === 0) setNumOfDays((curr) => curr - 1);
+    else setNumOfDays((curr) => curr - Number(step));
+  };
+
+  const handleIncrease = () => {
+    if (step === 0) setNumOfDays((curr) => +curr + 1);
+    else setNumOfDays((curr) => curr + Number(step));
+  };
+
+  const handleUserInput = (e) => {
+    setNumOfDays(e.target.vlaue);
+  };
+
+  const handleReset = () => {
+    setNumOfDays('');
+    setStep(0);
+  };
+
   return (
     <div className="counter-container">
       <div className="slider-container">
@@ -86,13 +107,14 @@ function DateCounter() {
           increment/decrement of days)
         </p>
         <input
-          onChange={(e) => setOutput(e.target.value)}
+          onChange={(e) => setStep(e.target.value)}
           type="range"
           min="0"
           max="10"
+          value={step}
         />
         <span className="range-output">
-          Days: <output>{output}</output>
+          Step: <output>{step}</output>
         </span>
       </div>
 
@@ -102,14 +124,19 @@ function DateCounter() {
           Now increase the number of days using buttons or by typing in the
           number directly
         </p>
-        <button>-</button>
-        <input type="text" />
-        <button>+</button>
+        <button onClick={handleDecrease}>-</button>
+        <input
+          type="text"
+          value={numOfDays}
+          onChange={(e) => setNumOfDays(+e.target.value)}
+        />
+        <button onClick={handleIncrease}>+</button>
       </div>
       <div className="final-text-container">
         <span className="step">Step 3 - Results Below</span>
         <p>Final text here</p>
       </div>
+      <button onClick={handleReset}>Reset</button>
     </div>
   );
 }
